@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PnL-Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #initial-amount {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    #profit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    #loss-btn {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Profit/Loss Calculator</h1>
+  <p>Initial amount: <span id="initial-amount">10000</span></p>
+
+  <button id="profit-btn">Profit</button>
+  <button id="loss-btn">Loss</button>
+
+  <script>
+    const initialAmountElem = document.getElementById('initial-amount');
+    const profitBtn = document.getElementById('profit-btn');
+    const lossBtn = document.getElementById('loss-btn');
+
+    profitBtn.addEventListener('click', () => {
+      fetch('/profit')
+        .then(response => response.text())
+        .then(updatedAmount => {
+          initialAmountElem.textContent = updatedAmount;
+        });
+    });
+
+    lossBtn.addEventListener('click', () => {
+      fetch('/loss')
+        .then(response => response.text())
+        .then(updatedAmount => {
+          initialAmountElem.textContent = updatedAmount;
+        });
+    });
+  </script>
+</body>
+</html>
